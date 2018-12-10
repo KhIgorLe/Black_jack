@@ -3,11 +3,10 @@ require_relative 'winner'
 require_relative 'interface'
 
 class Round
-
   attr_reader :bank, :interface
 
   def initialize(player, dealer)
-    @deck = deck
+    @deck = set_deck
     @player = player
     @dealer = dealer
     @bank = create_bank
@@ -15,6 +14,7 @@ class Round
   end
 
   def start
+    @deck = set_deck if @deck.cards.size < 4
     set_cards
     rate
     @interface.score_board(@player)
@@ -23,14 +23,14 @@ class Round
     action
     who_win
     @interface.total_information(@player, @dealer)
+    puts @deck.cards.size
     reset_cards
   end
 
   private
 
   def action
-    command = ""
-    while command != 3
+    loop do
       break if need_open_cards?
       @interface.round_menu
       command = @interface.command
@@ -92,6 +92,7 @@ class Round
       return
     end
 
+    new_deck?
     @dealer.set_cards(cards(1))
     @interface.show_star(@dealer)
     @interface.total_information(@player, @dealer) if black_jack?
@@ -100,6 +101,7 @@ class Round
   def player_action
     return if @player.hand.cards.size != 2
 
+    new_deck?
     @player.set_cards(cards(1))
     dealer_action if @player.hand.score < 21
   end
@@ -122,8 +124,12 @@ class Round
     @dealer.reset_cards
   end
 
-  def deck
+  def set_deck
     Deck.new
+  end
+
+  def new_deck?
+    @deck = set_deck if @deck.cards.empty?
   end
 
   def create_bank

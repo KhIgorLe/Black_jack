@@ -1,5 +1,4 @@
 class Hand
-
   attr_reader :cards
 
   def initialize
@@ -28,5 +27,4 @@ class Hand
 
     card.rank.to_i
   end
-
 end

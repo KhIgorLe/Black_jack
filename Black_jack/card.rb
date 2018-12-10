@@ -1,8 +1,16 @@
-require_relative 'rank_suits'
-
 class Card
+  RANKS = %w(2 3 4 5 6 7 8 9 10 J Q K A).freeze
+  SUITS = %w(♥ ♦ ♣ ♠).freeze
 
-  include RankSuits
+  class << self
+    def ranks
+      RANKS
+    end
+
+    def suits
+      SUITS
+    end
+  end
 
   attr_reader :rank, :suit
 
@@ -27,7 +35,7 @@ class Card
   private
 
   def validate!
-    raise "Rank must be one of: #{RANK.join(", ")}" unless RANK.include?(@rank)
+    raise "Rank must be one of: #{RANKS.join(", ")}" unless RANKS.include?(@rank)
     raise "Suit must be one of: #{SUITS.join(", ")}" unless SUITS.include?(@suit)
   end
 end

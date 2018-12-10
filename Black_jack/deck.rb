@@ -1,10 +1,6 @@
 require_relative 'card'
-require_relative 'rank_suits'
 
 class Deck
-
-  include RankSuits
-
   attr_reader :cards
 
   def initialize
@@ -19,14 +15,11 @@ class Deck
 
   def set_cards
     cards = []
-    RANK.each do |rank|
-      SUITS.each do |suit|
+    Card.ranks.each do |rank|
+      Card.suits.each do |suit|
         cards << Card.new(rank, suit)
       end
     end
     cards.shuffle!
   end
-  rescue RuntimeError => e
-    puts e.message
-    retry
 end

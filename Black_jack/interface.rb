@@ -1,5 +1,4 @@
 class Interface
-
   MAIN_MENU = <<-MENU.freeze
     Select a menu item:
     Enter 1 - Deal cards
@@ -69,7 +68,7 @@ class Interface
   end
 
   def command
-    command = gets.to_i
+    gets.to_i
   end
 
   def out_of_money
@@ -86,6 +85,6 @@ class Interface
 
   def set_name
     puts "Enter your name"
-    name = gets.chomp
+    gets.chomp
   end
 end

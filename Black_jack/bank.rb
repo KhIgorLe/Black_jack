@@ -1,5 +1,4 @@
 class Bank
-
   START_AMOUNT = 100
 
   BET = 10

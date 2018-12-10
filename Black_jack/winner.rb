@@ -1,5 +1,4 @@
 class Winner
-
   def initialize(player, dealer)
     @player = player
     @dealer = dealer
