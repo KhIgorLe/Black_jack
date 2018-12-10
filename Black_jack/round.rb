@@ -23,7 +23,6 @@ class Round
     action
     who_win
     @interface.total_information(@player, @dealer)
-    puts @deck.cards.size
     reset_cards
   end
 
